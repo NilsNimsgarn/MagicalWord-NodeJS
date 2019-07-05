@@ -1,0 +1,70 @@
+process.stdin.resume();
+process.stdin.setEncoding("utf-8");
+var stdin_input = "";
+process.stdin.on("data", function (input) 
+{
+stdin_input += input;
+});
+process.stdin.on("end", function () 
+{
+main(stdin_input);
+});
+
+function main(input)
+{
+    var lineinput = input.split("\n");
+    var tests = lineinput[0];
+    var lang = lineinput[1];
+    var string = lineinput[2];
+    var res = "";
+    for (var x = 0; x < lang; x++)
+    {
+        var letter = string.substring(x,x+1);
+        var asc = letter.charCodeAt(0)
+        var z = asc;
+        var y = asc;
+        do
+        {
+            z-= 1;
+            if (isPrime(z))
+            {
+            break;
+            }
+        }
+        while (z > 0);
+        do
+        {
+            y+=1;
+            if (isPrime(y))
+            {
+            break;
+            }
+        }
+        while (y < 1000);
+        
+        var diff1 = asc-z;
+        var diff2 = y-asc;
+        
+        if (diff1 <= diff2)
+        {
+            res = res + String.fromCharCode(z);
+        }
+        else
+        {
+            res = res + String.fromCharCode(y);
+        }
+    }
+    console.log(res);
+}
+
+function isPrime(number)
+{
+    let start = 2;
+    const limit = Math.sqrt(number);
+    while (start <= limit)
+    {
+        if (number % start++ < 1) return false;
+    }
+    return number > 1;
+}
+   
